@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mariadb:latest
+    container_name: maria_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./dbfiles:/var/lib/mysql
+
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - app
+
+
+networks:
+  app:
+    driver: bridge
